@@ -22,6 +22,11 @@ class Essential(commands.Cog):
         logger.debug("Syncing commands...")
         await self.bot.tree.sync()
         logger.debug("Commands synced!")
+        await self.bot.change_presence(
+            activity=discord.Activity(
+                name="all your slash commands", type=discord.ActivityType.listening
+            )
+        )
         logger.info(f"Logged in as {self.bot.user.name} ({self.bot.user.id})")
 
 
