@@ -11,8 +11,8 @@ class Essential(commands.Cog):
     @app_commands.command(name="ping", description="Check if the bot is online.")
     async def ping(self, interaction: discord.Interaction):
         embed = discord.Embed(
-            title="Pong!",
-            description="The bot is working fine!",
+            title="🏓 Pong!",
+            description=f"Latency: {interaction.client.latency}ms",
             color=discord.Color.green(),
         )
         await interaction.response.send_message(embed=embed)
