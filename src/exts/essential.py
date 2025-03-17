@@ -12,7 +12,7 @@ class Essential(commands.Cog):
     async def ping(self, interaction: discord.Interaction):
         embed = discord.Embed(
             title="🏓 Pong!",
-            description=f"Latency: {interaction.client.latency}ms",
+            description=f"Latency: {interaction.client.latency * 100}ms",
             color=discord.Color.green(),
         )
         await interaction.response.send_message(embed=embed)

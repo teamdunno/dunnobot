@@ -149,7 +149,7 @@ class TicTacToe(commands.Cog):
     @app_commands.command(name="tictactoe", description="Play a game of Tic Tac Toe!")
     async def tictactoe(self, interaction: discord.Interaction):
         # logger.debug("New tictactoe game started!")
-        view = Lobby(min_players=2)
+        view = Lobby(min_players=2, max_players=2)
         await interaction.response.send_message(embed=view.make_embed(), view=view)
 
 

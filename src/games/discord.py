@@ -2,12 +2,13 @@ import discord
 
 
 class Lobby:
-    def __init__(self, min_players: int):
+    def __init__(self, min_players: int, max_players: int):
         self.min_players: int = min_players
+        self.max_players: int = max_players
         self.joined: set[int] = set()  # Store IDs instead of objects
 
     def join(self, user: discord.User):
-        if len(self.joined) == self.min_players:
+        if len(self.joined) == self.max_players:
             return
 
         self.joined.add(user.id)  # Store the user ID
@@ -17,14 +18,14 @@ class Lobby:
 
 
 class LobbyView(discord.ui.View):
-    def __init__(self, min_players: int) -> None:
+    def __init__(self, *args, **kwargs) -> None:
         super().__init__()
-        self.lobby = Lobby(min_players=min_players)
+        self.lobby = Lobby(*args, **kwargs)
         self.to_play = "Some Unknown Game"
 
     def make_embed(self) -> discord.Embed:
         desc = "\n".join([f"<@{user_id}>" for user_id in list(self.lobby.joined)])
-        desc += f"\n\nMinimum Players: {self.lobby.min_players} | Current players: {len(self.lobby.joined)}"
+        desc += f"\n\nMinimum Players: {self.lobby.min_players} | Maximum Players: {self.lobby.max_players} | Current players: {len(self.lobby.joined)}"
         return discord.Embed(
             title=self.to_play, description=desc, color=discord.Color.gold()
         )
